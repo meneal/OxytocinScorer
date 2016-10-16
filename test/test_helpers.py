@@ -66,7 +66,30 @@ class Test_Helpers(unittest.TestCase):
         }
         result = rescale(raw_data, rev_list, non_zero_medians)
         self.assertEqual(result, expected)
-                                        
+
+    def test_rescale_nonzero_blanks(self):
+        rev_list = []
+        non_zero_medians = {
+            'X1': 1,
+            'X3': 1
+        }
+        raw_data = {
+            'X1': 1,
+            'X2': 'BLANK',
+            'X3': 'BLANK',
+            'X4': 5,
+            'X5': 4
+        }
+        expected = {
+            'X1': 0,
+            'X2': 0,
+            'X3': 1,
+            'X4': 4,
+            'X5': 3
+        }
+        result = rescale(raw_data, rev_list, non_zero_medians)
+        self.assertEqual(result, expected)        
+        
     def test_reduce_all(self):
         question_set = ['X1','X2','X3','X4','X5']
         raw_data = {
@@ -88,4 +111,3 @@ class Test_Helpers(unittest.TestCase):
              'X5': 5
          }
          self.assertEqual(row_select_reduce(raw_data, question_set), 6)
-            
