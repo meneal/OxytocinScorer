@@ -1,6 +1,4 @@
-
 import csv
-
 
 non_zero_medians = {
     'X3'  : 1,
@@ -20,10 +18,7 @@ reverse_likert = ['X3', 'X7', 'X11', 'X12', 'X15',
                   'X38', 'X40', 'X43', 'X45', 'X48',
                   'X52', 'X55']
 
-likert_score = [0,1,2,3]
-reverse_likert_score = [3,2,1,0]
-
-with open('./dat/cleanDat.csv', 'rb') as csvfile:
+with open('../dat/cleanDat.csv', 'rb') as csvfile:
     oxy_reader = csv.DictReader(csvfile)
     for line in oxy_reader:
         calculated_dat = {
@@ -42,7 +37,6 @@ with open('./dat/cleanDat.csv', 'rb') as csvfile:
 def calculate_awr(line):
     question_set = ['X2', 'X7', 'X25', 'X32', 'X45',
                     'X52', 'X54', 'X56']
-
     
 
 def calculate_cog(line):
