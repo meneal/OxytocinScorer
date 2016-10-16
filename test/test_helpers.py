@@ -4,6 +4,28 @@ from src.helpers.helpers import row_select_reduce
 
 class Test_Helpers(unittest.TestCase):
 
+    def test_subject_id(self):
+        rev_list = []
+        non_zero_medians = {}
+        raw_data = {
+            "Participant.ID": 'HCOT1000',
+            'X1': 1,
+            'X2': 2,
+            'X3': 4,
+            'X4': 3,
+            'X5': 2
+            }
+        expected = {
+            "Participant.ID": 'HCOT1000',
+            'X1': 0,
+            'X2': 1,
+            'X3': 3,
+            'X4': 2,
+            'X5': 1
+            }
+        result = rescale(raw_data, rev_list, non_zero_medians)
+        self.assertEqual(result, expected)        
+ 
     def test_no_rev(self):
         rev_list = []
         non_zero_medians = {}
@@ -46,10 +68,7 @@ class Test_Helpers(unittest.TestCase):
 
     def test_rescale_zero_blanks(self):
         rev_list = []
-        non_zero_medians = {
-            'X1': 1,
-            'X3': 1
-        }
+        non_zero_medians = ['X1', 'X3']
         raw_data = {
             'X1': 1,
             'X2': 2,
@@ -69,10 +88,7 @@ class Test_Helpers(unittest.TestCase):
 
     def test_rescale_nonzero_blanks(self):
         rev_list = []
-        non_zero_medians = {
-            'X1': 1,
-            'X3': 1
-        }
+        non_zero_medians = ['X1', 'X3']
         raw_data = {
             'X1': 1,
             'X2': 'BLANK',
